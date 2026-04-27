@@ -7,6 +7,7 @@
 [![npm downloads](https://img.shields.io/npm/dm/rageval.svg)](https://www.npmjs.com/package/rageval)
 [![Bundle Size](https://img.shields.io/bundlephobia/minzip/rageval)](https://bundlephobia.com/package/rageval)
 [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/cloudserveinfotech/rageval/badge)](https://scorecard.dev/viewer/?uri=github.com/cloudserveinfotech/rageval)
+[![OpenSSF Baseline](https://www.bestpractices.dev/projects/12673/baseline)](https://www.bestpractices.dev/projects/12673)
 [![TypeScript](https://img.shields.io/badge/TypeScript-6.0-blue)](https://www.typescriptlang.org/)
 
 **The RAGAS equivalent for Node.js.** Evaluate your RAG pipeline quality in TypeScript.
