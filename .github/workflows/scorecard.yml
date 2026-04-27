@@ -14,10 +14,10 @@ jobs:
     name: Scorecard analysis
     runs-on: ubuntu-latest
     permissions:
-      security-events: write  # upload SARIF to code scanning
-      id-token: write         # publish results to OSSF API
-      actions: read           # read workflow run data
-      contents: read          # checkout
+      security-events: write # upload SARIF to code scanning
+      id-token: write # publish results to OSSF API
+      actions: read # read workflow run data
+      contents: read # checkout
 
     steps:
       - name: Checkout

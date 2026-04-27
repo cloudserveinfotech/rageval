@@ -12,8 +12,8 @@ jobs:
     name: Publish to npm
     runs-on: ubuntu-latest
     permissions:
-      contents: write    # required: create GitHub Release + upload assets
-      id-token: write    # required: npm provenance attestation via OIDC
+      contents: write # required: create GitHub Release + upload assets
+      id-token: write # required: npm provenance attestation via OIDC
 
     steps:
       - name: Checkout
