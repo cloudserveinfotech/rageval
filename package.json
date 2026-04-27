@@ -1,0 +1,136 @@
+{
+  "name": "rageval",
+  "version": "0.1.0",
+  "description": "TypeScript RAG pipeline evaluation library — the RAGAS equivalent for Node.js. Evaluate answer faithfulness, context relevance, answer relevance, context recall, and context precision.",
+  "keywords": [
+    "rag",
+    "evaluation",
+    "llm",
+    "typescript",
+    "ai",
+    "ragas",
+    "langchain",
+    "retrieval-augmented-generation",
+    "hallucination-detection",
+    "claude",
+    "openai",
+    "nlp"
+  ],
+  "homepage": "https://github.com/cloudserveinfotech/rageval#readme",
+  "bugs": {
+    "url": "https://github.com/cloudserveinfotech/rageval/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cloudserveinfotech/rageval.git"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "CloudServe Labs",
+    "email": "labs@cloudserveinfotech.com",
+    "url": "https://cloudservelabs.com"
+  },
+  "sideEffects": false,
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./matchers": {
+      "import": {
+        "types": "./dist/matchers.d.ts",
+        "default": "./dist/matchers.js"
+      },
+      "require": {
+        "types": "./dist/matchers.d.cts",
+        "default": "./dist/matchers.cjs"
+      }
+    }
+  },
+  "bin": {
+    "rageval": "./dist/cli/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "PRIVACY.md",
+    "SECURITY.md",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "type-check": "tsc --noEmit",
+    "type-check:tests": "tsc --noEmit -p tsconfig.test.json",
+    "type-check:all": "pnpm run type-check && pnpm run type-check:tests",
+    "lint": "eslint src tests examples",
+    "lint:fix": "eslint src tests examples --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:ui": "vitest --ui",
+    "clean": "rm -rf dist coverage docs/api",
+    "prepublishOnly": "pnpm run clean && pnpm run build && pnpm run type-check:all && pnpm run lint && pnpm run format:check && pnpm run test",
+    "docs:generate": "typedoc",
+    "docs:serve": "typedoc && npx serve docs/api"
+  },
+  "peerDependencies": {
+    "@anthropic-ai/sdk": ">=0.80.0",
+    "openai": ">=6.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@anthropic-ai/sdk": {
+      "optional": true
+    },
+    "openai": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "commander": "13.1.0",
+    "zod": "4.3.6"
+  },
+  "devDependencies": {
+    "@anthropic-ai/sdk": "0.91.1",
+    "@changesets/cli": "2.31.0",
+    "@eslint/js": "^9.39.4",
+    "@types/node": "22.15.3",
+    "@vitest/coverage-v8": "4.1.5",
+    "@vitest/ui": "4.1.5",
+    "eslint": "9.39.4",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-import-x": "4.16.2",
+    "husky": "9.1.7",
+    "lint-staged": "16.4.0",
+    "openai": "6.34.0",
+    "prettier": "3.8.3",
+    "tsup": "8.5.1",
+    "typedoc": "0.28.19",
+    "typedoc-plugin-markdown": "4.11.0",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.59.0",
+    "vitest": "4.1.5"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "packageManager": "pnpm@10.33.0"
+}

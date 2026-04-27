@@ -1,0 +1,29 @@
+{
+  "entryPoints": ["src/index.ts", "src/matchers.ts"],
+  "entryPointStrategy": "resolve",
+  "out": "docs/api",
+  "name": "rageval",
+  "includeVersion": true,
+  "readme": "README.md",
+  "navigationLinks": {
+    "GitHub": "https://github.com/cloudserveinfotech/rageval",
+    "npm": "https://www.npmjs.com/package/rageval",
+    "CloudServe Labs": "https://cloudservelabs.com"
+  },
+  "categorizeByGroup": true,
+  "categoryOrder": ["Core", "Metrics", "Providers", "Exports", "Errors", "Utilities", "*"],
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "excludeInternal": true,
+  "searchInComments": true,
+  "githubPages": true,
+  "hideGenerator": false,
+  "treatWarningsAsErrors": false,
+  "validation": {
+    "notExported": true,
+    "invalidLink": true,
+    "notDocumented": false
+  },
+  "plugin": [],
+  "sort": ["source-order"]
+}

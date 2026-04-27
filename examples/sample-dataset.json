@@ -1,0 +1,41 @@
+[
+  {
+    "id": "q1",
+    "question": "What is the capital of France?",
+    "answer": "The capital of France is Paris.",
+    "contexts": [
+      "France is a country in Western Europe. It is known for its art, culture, and cuisine. Its capital and largest city is Paris, which is also known as the 'City of Light'."
+    ],
+    "groundTruth": "Paris is the capital of France."
+  },
+  {
+    "id": "q2",
+    "question": "What are the main benefits of TypeScript over JavaScript?",
+    "answer": "TypeScript offers static typing, better IDE support with autocompletion, and catches type errors at compile time rather than runtime.",
+    "contexts": [
+      "TypeScript is a strongly typed programming language that builds on JavaScript. It adds optional static typing and class-based object-oriented programming to the language.",
+      "One of the key benefits of TypeScript is that errors are caught during development (compile time) rather than in production (runtime). Modern IDEs provide rich autocompletion and refactoring support."
+    ],
+    "groundTruth": "TypeScript provides static type checking, improved tooling/IDE support, and early error detection at compile time."
+  },
+  {
+    "id": "q3",
+    "question": "How does RAG work?",
+    "answer": "RAG stands for Retrieval-Augmented Generation. It works by first retrieving relevant documents from a knowledge base and then passing them as context to an LLM to generate a grounded answer.",
+    "contexts": [
+      "Retrieval-Augmented Generation (RAG) is a technique that combines information retrieval with text generation. Given a query, the system first retrieves relevant passages from a large document corpus, then feeds them to a language model to produce a final answer.",
+      "RAG helps reduce hallucinations in LLMs by grounding responses in retrieved factual content rather than relying solely on the model's parametric knowledge."
+    ],
+    "groundTruth": "RAG retrieves relevant documents from a knowledge base and feeds them as context to an LLM, enabling grounded, factual answer generation."
+  },
+  {
+    "id": "q4",
+    "question": "What is the speed of light?",
+    "answer": "The speed of light in a vacuum is approximately 300,000 kilometres per second.",
+    "contexts": [
+      "The speed of light in a vacuum, denoted by c, is exactly 299,792,458 metres per second (approximately 300,000 km/s or 186,000 miles per second).",
+      "Light speed is a fundamental physical constant used as the ultimate speed limit in the universe, as described by Einstein's theory of special relativity."
+    ],
+    "groundTruth": "The speed of light in a vacuum is exactly 299,792,458 metres per second (approximately 300,000 km/s)."
+  }
+]

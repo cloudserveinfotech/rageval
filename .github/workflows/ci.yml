@@ -1,0 +1,74 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    name: CI — Node ${{ matrix.node-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      # Run all matrix entries even if one fails, so we see failures
+      # on every Node version in a single CI run rather than stopping early.
+      fail-fast: false
+      matrix:
+        # Test against all Active LTS and Current Node.js releases.
+        # Node 18: Active LTS (maintenance ends 2025-04-30)
+        # Node 20: Active LTS (maintenance ends 2026-04-30)
+        # Node 22: Current LTS (maintenance ends 2027-04-30)
+        node-version: [18.x, 20.x, 22.x]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@fe02b74ab2366585755ef8906ef3ce8aaec2f667 # v4.0.0
+        with:
+          version: 10.33.0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Type check (src + tests + examples)
+        run: pnpm type-check:all
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Format check
+        run: pnpm format:check
+
+      - name: Test with coverage
+        run: pnpm test:coverage
+
+      - name: Upload coverage to Codecov
+        # Only upload coverage once (Node 22) to avoid duplicate reports
+        if: matrix.node-version == '22.x'
+        uses: codecov/codecov-action@1e68e06f1dbfde0e4cefc87efeba9e4643565303 # v5.1.2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage/lcov.info
+          fail_ci_if_error: false
+
+      - name: Build
+        run: pnpm build
+
+      - name: Verify dist output
+        run: |
+          test -f dist/index.js   || (echo "ESM output missing" && exit 1)
+          test -f dist/index.cjs  || (echo "CJS output missing" && exit 1)
+          test -f dist/index.d.ts || (echo "Type declarations missing" && exit 1)
+          echo "All dist outputs present"

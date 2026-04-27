@@ -1,0 +1,27 @@
+# Source files (not needed in published package)
+src/
+tests/
+examples/
+coverage/
+
+# Config files
+tsconfig*.json
+tsup.config.ts
+vitest.config.ts
+eslint.config.mjs
+.prettierrc
+.prettierignore
+.husky/
+.changeset/
+
+# CI/CD
+.github/
+
+# Development
+node_modules/
+*.log
+.env*
+
+# Editor
+.vscode/
+.idea/

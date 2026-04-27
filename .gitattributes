@@ -1,0 +1,29 @@
+# Normalise all text files to LF on commit so cross-platform contributors
+# (Windows + macOS + Linux) get consistent line endings without the noisy
+# "LF will be replaced by CRLF" warnings on Windows.
+* text=auto eol=lf
+
+# Explicit overrides for common text formats that must stay LF
+*.ts        text eol=lf
+*.tsx       text eol=lf
+*.js        text eol=lf
+*.mjs       text eol=lf
+*.cjs       text eol=lf
+*.json      text eol=lf
+*.md        text eol=lf
+*.yml       text eol=lf
+*.yaml      text eol=lf
+*.html      text eol=lf
+*.css       text eol=lf
+*.sh        text eol=lf
+
+# Binary files — never normalise
+*.png       binary
+*.jpg       binary
+*.jpeg      binary
+*.gif       binary
+*.ico       binary
+*.woff      binary
+*.woff2     binary
+*.ttf       binary
+*.eot       binary
