@@ -51,18 +51,6 @@ jobs:
       - name: Format check
         run: pnpm format:check
 
-      - name: Test with coverage
-        run: pnpm test:coverage
-
-      - name: Upload coverage to Codecov
-        # Only upload coverage once (Node 22) to avoid duplicate reports
-        if: matrix.node-version == '22.x'
-        uses: codecov/codecov-action@1e68e06f1dbfde0e4cefc87efeba9e4643565303 # v5.1.2
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./coverage/lcov.info
-          fail_ci_if_error: false
-
       - name: Build
         run: pnpm build
 
@@ -72,3 +60,14 @@ jobs:
           test -f dist/index.cjs  || (echo "CJS output missing" && exit 1)
           test -f dist/index.d.ts || (echo "Type declarations missing" && exit 1)
           echo "All dist outputs present"
+
+      - name: Test with coverage
+        run: pnpm test:coverage
+
+      - name: Upload coverage to Codecov
+        if: matrix.node-version == '22.x'
+        uses: codecov/codecov-action@1e68e06f1dbfde0e4cefc87efeba9e4643565303 # v5.1.2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage/lcov.info
+          fail_ci_if_error: false
