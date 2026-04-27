@@ -20,7 +20,7 @@
 > # Opens http://localhost:3000 automatically
 > ```
 
-[RAGAS](https://github.com/explodinggradients/ragas) is the gold standard for RAG evaluation in Python (8,000+ ⭐). Until now, there was **no equivalent for TypeScript**. `rageval` fills that gap — with a clean API, multi-provider support (Anthropic Claude, OpenAI, and Azure OpenAI), and full TypeScript types.
+[RAGAS](https://github.com/vibrantlabsai/ragas) is the gold standard for RAG evaluation in Python. Until now, there was **no equivalent for TypeScript**. `rageval` fills that gap — with a clean API, multi-provider support (Anthropic Claude, OpenAI, and Azure OpenAI), and full TypeScript types.
 
 ---
 
@@ -133,7 +133,7 @@ import { AzureOpenAI } from 'openai'
 import { evaluate, faithfulness, contextRelevance } from 'rageval'
 
 // AzureOpenAI reads AZURE_OPENAI_API_KEY and AZURE_OPENAI_ENDPOINT from env
-const client = new AzureOpenAI({ apiVersion: '2024-08-01-preview' })
+const client = new AzureOpenAI({ apiVersion: '2024-10-21' })
 
 const results = await evaluate({
   provider: {
@@ -498,7 +498,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v5
         with:
           version: 10
 
@@ -780,7 +780,7 @@ Every `evaluate()` call sends LLM judge prompts to your chosen provider. Here ar
 | --------------------------- | -------------------- | --------------- | -------------------- |
 | `claude-haiku-4-5-20251001` | ~800 tokens          | ~$0.0002        | ~$0.02               |
 | `claude-sonnet-4-6`         | ~800 tokens          | ~$0.002         | ~$0.20               |
-| `claude-opus-4-6`           | ~800 tokens          | ~$0.015         | ~$1.50               |
+| `claude-opus-4-7`           | ~800 tokens          | ~$0.015         | ~$1.50               |
 | `gpt-4o-mini`               | ~800 tokens          | ~$0.0002        | ~$0.02               |
 | `gpt-4o`                    | ~800 tokens          | ~$0.005         | ~$0.50               |
 
@@ -973,7 +973,7 @@ try {
 {
   type: 'anthropic',
   client: new Anthropic(),
-  model: 'claude-haiku-4-5-20251001',   // haiku: fast + cost-efficient; use claude-opus-4-6 for highest accuracy
+  model: 'claude-haiku-4-5-20251001',   // haiku: fast + cost-efficient; use claude-opus-4-7 for highest accuracy
   temperature: 0,  // optional — set to 0 for reproducible, deterministic scores
 }
 
@@ -988,7 +988,7 @@ try {
 // Azure OpenAI Service (enterprise / data residency)
 {
   type: 'azure',
-  client: new AzureOpenAI({ apiVersion: '2024-08-01-preview' }),
+  client: new AzureOpenAI({ apiVersion: '2024-10-21' }),
   model: 'gpt-4o-mini',   // your Azure deployment name
   temperature: 0,
 }
@@ -1000,7 +1000,7 @@ All three provider types support the same optional fields: `model`, `temperature
 running evaluation benchmarks or CI gates — scores can vary by ±0.03 between runs at higher
 temperatures. Leave it unset (or use `temperature: 0.3`) when you want natural scoring variance.
 
-Supported Anthropic models: `claude-opus-4-6`, `claude-sonnet-4-6`, `claude-haiku-4-5-20251001`
+Supported Anthropic models: `claude-opus-4-7`, `claude-sonnet-4-6`, `claude-haiku-4-5-20251001`
 Supported OpenAI/Azure models: `gpt-4o`, `gpt-4o-mini`, and any chat completion model (or Azure deployment name)
 
 ---
@@ -1037,7 +1037,7 @@ rageval injects your `question`, `answer`, and `contexts` values directly into L
 
 - Es, S., James, J., Anke, L. E., & Schockaert, S. (2023). _RAGAS: Automated Evaluation of Retrieval Augmented Generation_. arXiv:2309.15217. https://arxiv.org/abs/2309.15217
 - Zheng, L., et al. (2023). _Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena_. arXiv:2306.05685. https://arxiv.org/abs/2306.05685
-- [RAGAS Python library](https://github.com/explodinggradients/ragas) — the original Python implementation
+- [RAGAS Python library](https://github.com/vibrantlabsai/ragas) — the original Python implementation
 
 ## Contributing
 

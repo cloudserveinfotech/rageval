@@ -18,11 +18,10 @@ jobs:
       # on every Node version in a single CI run rather than stopping early.
       fail-fast: false
       matrix:
-        # Test against all Active LTS and Current Node.js releases.
-        # Node 18: Active LTS (maintenance ends 2025-04-30)
         # Node 20: Active LTS (maintenance ends 2026-04-30)
-        # Node 22: Current LTS (maintenance ends 2027-04-30)
-        node-version: [18.x, 20.x, 22.x]
+        # Node 22: Active LTS (maintenance ends 2027-04-30)
+        # Node 24: Current LTS (maintenance ends 2028-04-30)
+        node-version: [20.x, 22.x, 24.x]
 
     steps:
       - name: Checkout
