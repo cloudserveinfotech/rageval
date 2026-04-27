@@ -1,6 +1,6 @@
 {
   "name": "rageval",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "TypeScript RAG pipeline evaluation library — the RAGAS equivalent for Node.js. Evaluate answer faithfulness, context relevance, answer relevance, context recall, and context precision.",
   "keywords": [
     "rag",

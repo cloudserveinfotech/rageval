@@ -6,6 +6,20 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ---
 
+## v0.1.1 — 2026-04-28
+
+### Fixed
+
+- CI matrix updated to Node 20 / 22 / 24 (dropped EOL Node 18, added Node 24 Active LTS)
+- Build step now runs before tests so `dist/` exists when `public-api.test.ts` runs
+- pnpm version conflict: removed duplicate `version:` pin from all workflow files — version is now read exclusively from `packageManager` in `package.json`
+- RAGAS repo link updated to new org (`vibrantlabsai/ragas`)
+- Anthropic model reference updated: `claude-opus-4-6` → `claude-opus-4-7`
+- Azure OpenAI `apiVersion` updated: `2024-08-01-preview` → `2024-10-21` (GA stable)
+- Stale star count removed from RAGAS reference (grows too fast to hardcode)
+
+---
+
 ## v0.1.0 — 2026-04-25
 
 ### Added
