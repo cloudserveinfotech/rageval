@@ -1,5 +1,5 @@
 import { defineConfig } from 'tsup'
-import { chmodSync, existsSync, readFileSync } from 'fs'
+import { chmodSync, existsSync, readFileSync, writeFileSync } from 'fs'
 
 // Read version once at build time so the CLI always reports the correct version
 // without needing to read package.json at runtime (which breaks on global installs).
@@ -28,10 +28,16 @@ export default defineConfig({
   define: {
     __RAGEVAL_VERSION__: JSON.stringify(pkg.version),
   },
-  // Make the CLI executable on Unix systems after every build
   async onSuccess() {
-    if (process.platform !== 'win32' && existsSync('dist/cli/index.js')) {
-      chmodSync('dist/cli/index.js', 0o755)
+    const cliPath = 'dist/cli/index.js'
+    if (existsSync(cliPath)) {
+      // Normalise CRLF → LF so npm's bin validator accepts the shebang on all platforms.
+      // On Windows, esbuild writes CRLF; a shebang ending with \r is rejected by npm publish.
+      const content = readFileSync(cliPath, 'utf-8')
+      writeFileSync(cliPath, content.replace(/\r\n/g, '\n'), 'utf-8')
+      if (process.platform !== 'win32') {
+        chmodSync(cliPath, 0o755)
+      }
     }
   },
 })

@@ -18,23 +18,20 @@ jobs:
       # on every Node version in a single CI run rather than stopping early.
       fail-fast: false
       matrix:
-        # Test against all Active LTS and Current Node.js releases.
-        # Node 18: Active LTS (maintenance ends 2025-04-30)
         # Node 20: Active LTS (maintenance ends 2026-04-30)
-        # Node 22: Current LTS (maintenance ends 2027-04-30)
-        node-version: [18.x, 20.x, 22.x]
+        # Node 22: Active LTS (maintenance ends 2027-04-30)
+        # Node 24: Current LTS (maintenance ends 2028-04-30)
+        node-version: [20.x, 22.x, 24.x]
 
     steps:
       - name: Checkout
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@fe02b74ab2366585755ef8906ef3ce8aaec2f667 # v4.0.0
-        with:
-          version: 10.33.0
+        uses: pnpm/action-setup@903f9c1a6ebcba6cf41d87230be49611ac97822e # v6.0.3
 
       - name: Setup Node.js
-        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
         with:
           node-version: ${{ matrix.node-version }}
           cache: pnpm
@@ -51,18 +48,6 @@ jobs:
       - name: Format check
         run: pnpm format:check
 
-      - name: Test with coverage
-        run: pnpm test:coverage
-
-      - name: Upload coverage to Codecov
-        # Only upload coverage once (Node 22) to avoid duplicate reports
-        if: matrix.node-version == '22.x'
-        uses: codecov/codecov-action@1e68e06f1dbfde0e4cefc87efeba9e4643565303 # v5.1.2
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./coverage/lcov.info
-          fail_ci_if_error: false
-
       - name: Build
         run: pnpm build
 
@@ -72,3 +57,14 @@ jobs:
           test -f dist/index.cjs  || (echo "CJS output missing" && exit 1)
           test -f dist/index.d.ts || (echo "Type declarations missing" && exit 1)
           echo "All dist outputs present"
+
+      - name: Test with coverage
+        run: pnpm test:coverage
+
+      - name: Upload coverage to Codecov
+        if: matrix.node-version == '22.x'
+        uses: codecov/codecov-action@57e3a136b779b570ffcdbf80b3bdc90e7fab3de2 # v6.0.0
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage/lcov.info
+          fail_ci_if_error: false

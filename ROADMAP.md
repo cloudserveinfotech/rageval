@@ -123,4 +123,4 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for how to get started.
 
 ---
 
-_Built and maintained by [RAMSIO CLOUDSERVE INFOTECH PRIVATE LIMITED](https://cloudserveinfotech.com)._
+_Built and maintained by [CloudServe Labs](https://cloudservelabs.com) — the AI/LLM division of [CloudServe Infotech](https://cloudserveinfotech.com)._
