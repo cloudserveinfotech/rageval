@@ -1,0 +1,54 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build output
+dist/
+
+# Test coverage
+coverage/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Smoke test output
+examples/smoke-test-results.json
+examples/smoke-test-results.csv
+
+# Temporary files
+*.tmp
+*.temp
+
+# TypeScript build info
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+
+# Generated TypeDoc API documentation (built by CI)
+docs/api/
+
+# Internal scratch and build artefacts — never commit
+_tmp_*
+docs/memory/
+docs/strategy/
+
+# Claude Code per-machine permission grants (do not share across machines)
+.claude/settings.local.json
