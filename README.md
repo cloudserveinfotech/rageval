@@ -1,11 +1,12 @@
 # rageval
 
-[![npm version](https://img.shields.io/npm/v/rageval.svg)](https://www.npmjs.com/package/rageval)
+[![npm version](https://img.shields.io/npm/v/%40rageval%2Feval.svg)](https://www.npmjs.com/package/@rageval/eval)
 [![CI](https://github.com/cloudserveinfotech/rageval/actions/workflows/ci.yml/badge.svg)](https://github.com/cloudserveinfotech/rageval/actions/workflows/ci.yml)
 [![Coverage](https://codecov.io/gh/cloudserveinfotech/rageval/branch/main/graph/badge.svg)](https://codecov.io/gh/cloudserveinfotech/rageval)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![npm downloads](https://img.shields.io/npm/dm/rageval.svg)](https://www.npmjs.com/package/rageval)
-[![Bundle Size](https://img.shields.io/bundlephobia/minzip/rageval)](https://bundlephobia.com/package/rageval)
+[![npm downloads](https://img.shields.io/npm/dm/%40rageval%2Feval.svg)](https://www.npmjs.com/package/@rageval/eval)
+[![Bundle Size](https://img.shields.io/bundlephobia/minzip/@rageval/eval)](https://bundlephobia.com/package/@rageval/eval)
+[![Docs](https://img.shields.io/badge/docs-API%20Reference-blue)](https://cloudserveinfotech.github.io/rageval/)
 [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/cloudserveinfotech/rageval/badge)](https://scorecard.dev/viewer/?uri=github.com/cloudserveinfotech/rageval)
 [![OpenSSF Baseline](https://www.bestpractices.dev/projects/12673/baseline)](https://www.bestpractices.dev/projects/12673)
 [![TypeScript](https://img.shields.io/badge/TypeScript-6.0-blue)](https://www.typescriptlang.org/)
@@ -43,8 +44,8 @@ Every company building RAG pipelines in Node.js/TypeScript faces the same proble
 ## Install
 
 ```bash
-pnpm add rageval
-npm install rageval
+pnpm add @rageval/eval
+npm install @rageval/eval
 ```
 
 You also need one LLM provider installed (at least one is required):
@@ -61,10 +62,10 @@ pnpm add openai
 >
 > ```js
 > // CommonJS (Node.js without "type": "module")
-> const { evaluate, faithfulness } = require('rageval')
+> const { evaluate, faithfulness } = require('@rageval/eval')
 >
 > // ESM in plain .mjs or in a package with "type": "module"
-> import { evaluate, faithfulness } from 'rageval'
+> import { evaluate, faithfulness } from '@rageval/eval'
 > ```
 
 > **Privacy note:** When you call `evaluate()`, your questions, answers, and context chunks are sent to your chosen LLM provider's API (Anthropic or OpenAI). rageval itself stores nothing and has no servers. See [PRIVACY.md](./PRIVACY.md) for full details. Ensure your use of the provider API complies with your data handling obligations.
@@ -75,7 +76,7 @@ pnpm add openai
 
 ```typescript
 import Anthropic from '@anthropic-ai/sdk'
-import { evaluate, faithfulness, contextRelevance, answerRelevance } from 'rageval'
+import { evaluate, faithfulness, contextRelevance, answerRelevance } from '@rageval/eval'
 
 const client = new Anthropic()
 
@@ -111,7 +112,7 @@ console.log(results.scores)
 
 ```typescript
 import OpenAI from 'openai'
-import { evaluate, faithfulness, contextRelevance } from 'rageval'
+import { evaluate, faithfulness, contextRelevance } from '@rageval/eval'
 
 const client = new OpenAI()
 
@@ -130,7 +131,7 @@ For enterprise teams with data residency requirements or Azure-hosted infrastruc
 
 ```typescript
 import { AzureOpenAI } from 'openai'
-import { evaluate, faithfulness, contextRelevance } from 'rageval'
+import { evaluate, faithfulness, contextRelevance } from '@rageval/eval'
 
 // AzureOpenAI reads AZURE_OPENAI_API_KEY and AZURE_OPENAI_ENDPOINT from env
 const client = new AzureOpenAI({ apiVersion: '2024-10-21' })
@@ -176,7 +177,7 @@ const results = await evaluate({
 ## Evaluate All 5 Metrics
 
 ```typescript
-import { evaluate } from 'rageval'
+import { evaluate } from '@rageval/eval'
 
 // Omit `metrics` to run all 5 automatically
 const results = await evaluate({
@@ -281,7 +282,7 @@ console.log(results.samples[0].reasoning)
 If you run a multi-tenant product and want to evaluate RAG quality **per tenant**, tag each sample with `tenantId` (and optional `metadata`). Both fields propagate untouched to every `SampleResult`, so you can group, filter, or audit by tenant in the same evaluation run.
 
 ```typescript
-import { evaluate, faithfulness } from 'rageval'
+import { evaluate, faithfulness } from '@rageval/eval'
 
 const results = await evaluate({
   provider: { type: 'anthropic', client },
@@ -331,7 +332,7 @@ for (const [tenant, scores] of byTenant) {
 rageval supports every standard output format — pick the one that fits your workflow.
 
 ```typescript
-import { evaluate, toJson, toCsv, toHtml, toMarkdown, toJUnit, toSarif, printReport } from 'rageval'
+import { evaluate, toJson, toCsv, toHtml, toMarkdown, toJUnit, toSarif, printReport } from '@rageval/eval'
 import { writeFileSync } from 'node:fs'
 
 const results = await evaluate({ ... })
@@ -367,7 +368,7 @@ writeFileSync('sarif.json',   toSarif(results))         // GitHub Advanced Secur
 
 ```bash
 # Install globally (or use npx)
-npm install -g rageval
+npm install -g @rageval/eval
 
 # Evaluate → terminal report + save JSON
 ANTHROPIC_API_KEY=sk-ant-... rageval eval \
@@ -449,7 +450,7 @@ Fields:
 Enforce minimum acceptable scores in CI — if your RAG pipeline regresses, the build fails automatically.
 
 ```typescript
-import { evaluate, ThresholdError } from 'rageval'
+import { evaluate, ThresholdError } from '@rageval/eval'
 
 try {
   await evaluate({
@@ -555,7 +556,7 @@ To also generate a JUnit test report (visible in the GitHub Actions **Tests** ta
 Use `onProgress` to show a progress bar or log updates when evaluating hundreds of samples:
 
 ```typescript
-import { evaluate } from 'rageval'
+import { evaluate } from '@rageval/eval'
 
 const results = await evaluate({
   provider: { type: 'anthropic', client },
@@ -578,7 +579,7 @@ rageval ships built-in Vitest and Jest matchers for writing quality assertions d
 
 ```typescript
 // vitest.setup.ts  (or jest.setup.ts)
-import { ragevalMatchers } from 'rageval/matchers'
+import { ragevalMatchers } from '@rageval/eval/matchers'
 import { expect } from 'vitest' // or: import { expect } from '@jest/globals'
 
 expect.extend(ragevalMatchers)
@@ -605,7 +606,7 @@ export default {
 ### Usage
 
 ```typescript
-import { evaluate, faithfulness, answerRelevance } from 'rageval'
+import { evaluate, faithfulness, answerRelevance } from '@rageval/eval'
 
 describe('RAG pipeline quality', () => {
   let results: Awaited<ReturnType<typeof evaluate>>
@@ -647,7 +648,7 @@ describe('RAG pipeline quality', () => {
 Write your own metric to measure anything your pipeline needs.
 
 ```typescript
-import type { Metric, MetricInput, MetricOutput, LlmProvider } from 'rageval'
+import type { Metric, MetricInput, MetricOutput, LlmProvider } from '@rageval/eval'
 
 const responseLength: Metric = {
   name: 'responseLength',
@@ -672,8 +673,8 @@ const results = await evaluate({
 ### LLM-judged custom metric
 
 ```typescript
-import type { Metric, MetricInput, MetricOutput, LlmProvider } from 'rageval'
-import { jsonInstruction, parseLlmScore } from 'rageval'
+import type { Metric, MetricInput, MetricOutput, LlmProvider } from '@rageval/eval'
+import { jsonInstruction, parseLlmScore } from '@rageval/eval'
 
 const nonToxicity: Metric = {
   name: 'nonToxicity',
@@ -720,7 +721,7 @@ interface Metric {
 Compute cosine similarity between two numeric vectors (useful in custom metrics).
 
 ```typescript
-import { cosineSimilarity } from 'rageval'
+import { cosineSimilarity } from '@rageval/eval'
 
 const similarity = cosineSimilarity([1, 0, 0], [0.9, 0.1, 0])
 // -> ~0.994
@@ -731,7 +732,7 @@ const similarity = cosineSimilarity([1, 0, 0], [0.9, 0.1, 0])
 Parses a raw LLM response string into `{ score: number, reasoning: string }`. Handles markdown fences, preamble text, score-as-string, and out-of-range clamping. Used internally by all built-in metrics and available for custom metric authors.
 
 ```typescript
-import { parseLlmScore } from 'rageval'
+import { parseLlmScore } from '@rageval/eval'
 
 const { score, reasoning } = parseLlmScore(llmResponse)
 // score is always in [0, 1]; reasoning is '' when omitted by the model
@@ -742,7 +743,7 @@ const { score, reasoning } = parseLlmScore(llmResponse)
 A function that returns the standard JSON output instruction to append to any LLM judge prompt. Pass `true` to require the model to include a reasoning field.
 
 ```typescript
-import { jsonInstruction } from 'rageval'
+import { jsonInstruction } from '@rageval/eval'
 
 // Without reasoning (compact output)
 const prompt = `...your evaluation criteria...\n\n${jsonInstruction(false)}`
@@ -874,12 +875,12 @@ If you're moving from the Python RAGAS library to a Node.js/TypeScript stack, he
 
 | RAGAS Python                                  | rageval (TypeScript)                                       |
 | --------------------------------------------- | ---------------------------------------------------------- |
-| `from ragas import evaluate`                  | `import { evaluate } from 'rageval'`                       |
-| `from ragas.metrics import faithfulness`      | `import { faithfulness } from 'rageval'`                   |
-| `from ragas.metrics import context_recall`    | `import { contextRecall } from 'rageval'`                  |
-| `from ragas.metrics import context_precision` | `import { contextPrecision } from 'rageval'`               |
-| `from ragas.metrics import answer_relevancy`  | `import { answerRelevance } from 'rageval'`                |
-| `from ragas.metrics import context_relevancy` | `import { contextRelevance } from 'rageval'`               |
+| `from ragas import evaluate`                  | `import { evaluate } from '@rageval/eval'`                       |
+| `from ragas.metrics import faithfulness`      | `import { faithfulness } from '@rageval/eval'`                   |
+| `from ragas.metrics import context_recall`    | `import { contextRecall } from '@rageval/eval'`                  |
+| `from ragas.metrics import context_precision` | `import { contextPrecision } from '@rageval/eval'`               |
+| `from ragas.metrics import answer_relevancy`  | `import { answerRelevance } from '@rageval/eval'`                |
+| `from ragas.metrics import context_relevancy` | `import { contextRelevance } from '@rageval/eval'`               |
 | `Dataset.from_dict({...})`                    | pass a plain `RagSample[]` array                           |
 | `EmbeddingsConfig(provider=...)`              | not needed — rageval uses LLM-as-judge only                |
 | `llm=ChatAnthropic(...)`                      | `provider: { type: 'anthropic', client: new Anthropic() }` |
@@ -893,6 +894,8 @@ RAGAS Python requires `pandas` DataFrames as input. rageval takes a plain JSON a
 ---
 
 ## API Reference
+
+> Full generated API docs are available at **https://cloudserveinfotech.github.io/rageval/**
 
 ### `evaluate(options)`
 
@@ -954,7 +957,7 @@ interface EvaluationResult {
 Thrown by `evaluate()` when scores fall below configured thresholds.
 
 ```typescript
-import { ThresholdError } from 'rageval'
+import { ThresholdError } from '@rageval/eval'
 
 try {
   await evaluate({ ..., thresholds: { faithfulness: 0.8 } })
@@ -1023,7 +1026,7 @@ Make sure you've extended `expect` in your setup file and added it to `vitest.co
 Increase `concurrency` (default: 5). Watch your provider's rate limits.
 
 **CLI: `rageval: command not found`**
-Either install globally (`npm install -g rageval`) or use `npx rageval eval ...`.
+Either install globally (`npm install -g @rageval/eval`) or use `npx rageval eval ...`.
 
 **Serverless / Edge runtimes (Cloudflare Workers, Vercel Edge, Deno Deploy)**
 rageval's core `evaluate()` function is Edge-compatible as long as you do **not** use the `checkpoint` option (which writes to the filesystem). Do not pass `checkpoint` on Edge runtimes. The `node:fs` module is only imported lazily when `checkpoint` is provided, so the library will not crash on import.

@@ -1,12 +1,17 @@
 # Changelog
 
-All notable changes to `rageval` will be documented in this file.
+All notable changes to `@rageval/eval` will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and uses [Changesets](https://github.com/changesets/changesets) for release management.
 
 ---
 
 ## v0.1.1 — 2026-04-28
+
+### Changed
+
+- **Package renamed to `@rageval/eval`** — published under the `@rageval` npm organization. Install with `npm install @rageval/eval` or `pnpm add @rageval/eval`. Import paths change from `'rageval'` → `'@rageval/eval'` and `'rageval/matchers'` → `'@rageval/eval/matchers'`. The `@rageval` scope is reserved for the rageval ecosystem (`@rageval/testset`, etc. in future releases).
+- **TypeDoc API docs live** — full API reference available at https://cloudserveinfotech.github.io/rageval/
 
 ### Fixed
 
