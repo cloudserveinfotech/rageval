@@ -875,12 +875,12 @@ If you're moving from the Python RAGAS library to a Node.js/TypeScript stack, he
 
 | RAGAS Python                                  | rageval (TypeScript)                                       |
 | --------------------------------------------- | ---------------------------------------------------------- |
-| `from ragas import evaluate`                  | `import { evaluate } from '@rageval/eval'`                       |
-| `from ragas.metrics import faithfulness`      | `import { faithfulness } from '@rageval/eval'`                   |
-| `from ragas.metrics import context_recall`    | `import { contextRecall } from '@rageval/eval'`                  |
-| `from ragas.metrics import context_precision` | `import { contextPrecision } from '@rageval/eval'`               |
-| `from ragas.metrics import answer_relevancy`  | `import { answerRelevance } from '@rageval/eval'`                |
-| `from ragas.metrics import context_relevancy` | `import { contextRelevance } from '@rageval/eval'`               |
+| `from ragas import evaluate`                  | `import { evaluate } from '@rageval/eval'`                 |
+| `from ragas.metrics import faithfulness`      | `import { faithfulness } from '@rageval/eval'`             |
+| `from ragas.metrics import context_recall`    | `import { contextRecall } from '@rageval/eval'`            |
+| `from ragas.metrics import context_precision` | `import { contextPrecision } from '@rageval/eval'`         |
+| `from ragas.metrics import answer_relevancy`  | `import { answerRelevance } from '@rageval/eval'`          |
+| `from ragas.metrics import context_relevancy` | `import { contextRelevance } from '@rageval/eval'`         |
 | `Dataset.from_dict({...})`                    | pass a plain `RagSample[]` array                           |
 | `EmbeddingsConfig(provider=...)`              | not needed — rageval uses LLM-as-judge only                |
 | `llm=ChatAnthropic(...)`                      | `provider: { type: 'anthropic', client: new Anthropic() }` |
