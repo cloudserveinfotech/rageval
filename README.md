@@ -443,6 +443,20 @@ Fields:
 - `groundTruth` (optional): Expected answer — required for `contextRecall`
 - `id` (optional): Identifier for traceability in results
 
+> **Don't have an evaluation dataset yet?** [`rageval-testset`](https://github.com/cloudserveinfotech/rageval-testset) is the companion package that generates `RagSample[]` arrays directly from your documents (PDF, Markdown, plain text) — ready to pass straight into `evaluate()`. It handles chunking, question synthesis, faithfulness critic, diversity dedup, cost estimation, and bounded retries. Two function calls from raw docs to evaluation scores:
+>
+> ```typescript
+> import { generate } from 'rageval-testset'
+> import { evaluate } from '@rageval/eval'
+>
+> const result = await generate({ inputs: ['./docs/handbook.pdf'], testsetSize: 100, provider })
+> const scores = await evaluate({ dataset: result.samples, provider })
+> ```
+>
+> ```bash
+> npm install rageval-testset
+> ```
+
 ---
 
 ## CI Quality Gate (Score Thresholds)
