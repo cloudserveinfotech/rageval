@@ -58,7 +58,7 @@
     }
   },
   "bin": {
-    "rageval": "./dist/cli/index.js"
+    "rageval": "dist/cli/index.js"
   },
   "files": [
     "dist",
